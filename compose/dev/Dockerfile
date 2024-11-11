@@ -1,4 +1,4 @@
-FROM ubuntu:latest as COIN
+FROM ubuntu:20.04 AS COIN
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -12,7 +12,7 @@ WORKDIR /var/coin-or
 RUN ./coinbrew fetch Couenne@0.5.8 --skip="ThirdParty/Blas ThirdParty/Lapack ThirdParty/Metis" --no-prompt
 RUN ./coinbrew build Couenne@0.5.8 --skip="ThirdParty/Blas ThirdParty/Lapack ThirdParty/Metis" --no-prompt --prefix=/usr --tests=none LT_LDFLAGS=-all-static LDFLAGS=-static --disable-shared
 
-FROM ubuntu:latest as RELEASE
+FROM ubuntu:20.04 AS RELEASE
 
 RUN apt-get update
 RUN apt-get -y install --no-install-recommends libgfortran-10-dev libblas-dev liblapack-dev libmetis-dev libnauty2-dev
@@ -37,6 +37,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN git clone https://github.com/tulip-control/dd.git; \
     cd dd; \
+    git checkout --detach v0.5.7; \
     python3 -m ensurepip; \
     pip install cython; \
     python setup.py install --fetch --cudd
