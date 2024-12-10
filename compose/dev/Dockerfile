@@ -39,7 +39,7 @@ RUN git clone https://github.com/tulip-control/dd.git; \
     cd dd; \
     git checkout --detach v0.5.6; \
     python3 -m ensurepip; \
-    pip install cython==0.29.22; \
+    pip install cython==0.29.23; \
     python setup.py install --fetch --cudd
 
 WORKDIR /app
