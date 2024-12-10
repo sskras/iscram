@@ -40,6 +40,8 @@ RUN git clone https://github.com/tulip-control/dd.git; \
     git checkout --detach v0.5.6; \
     python3 -m ensurepip; \
     pip install cython==0.29.23; \
+    pip install astutils==0.0.4; \
+    pip install pyparsing==2.4.7; \
     python setup.py install --fetch --cudd
 
 WORKDIR /app
